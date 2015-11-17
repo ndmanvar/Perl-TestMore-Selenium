@@ -8,7 +8,6 @@ use JSON;
 use Test::More tests => 1;
 use LWP::UserAgent;
 use HTTP::Request;
-use Data::Dumper;
 
 my $job_id;
 my $test_result;
@@ -55,7 +54,6 @@ sub update_sauce {
 	$req->authorization_basic($username, $access_key);
 	$req->header('content-type' => 'application/json');
 	$req->content($result_data);
-	print Dumper($req);
 	$ua->request($req)->as_string;
 }
 update_sauce();
