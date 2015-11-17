@@ -7,12 +7,14 @@
 
 # Installing Dependencies
 ```
-cpanm Test::More
-cpanm JSON
-cpanm Env
-cpanm Selenium::Remote::Driver
+cpan -i Test::More
+cpan -i JSON
+cpan -i Env
+cpan -i Selenium::Remote::Driver
+cpan -i LWP::UserAgent
+cpan -i HTTP::Request
 
-*sudo may be necessary
+	*sudo may be necessary
 ```
 
 # Running the tests
