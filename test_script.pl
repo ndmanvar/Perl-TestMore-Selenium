@@ -6,6 +6,9 @@ use Selenium::Remote::Driver;
 use Env;
 use JSON;
 use Test::More tests => 1;
+use LWP::UserAgent;
+use HTTP::Request;
+use Data::Dumper;
 
 my $job_id;
 my $test_result;
@@ -42,10 +45,20 @@ if($passing == 1) {
   $test_result = 'false';
 }
 
-my $url = "https://$username:$access_key\@saucelabs.com/rest/v1/$username/jobs/$job_id";
+my $url = "http://$username:$access_key\@saucelabs.com/rest/v1/$username/jobs/$job_id";
 
-#TODO Replace with a better call to the sauce labs REST API
-system "curl -u $username:$access_key -X PUT -H \"Content-Type: application/json\" -d '{\"passed\": $test_result}' $url"
+sub update_sauce {
+	my $result_data = "{ \"passed\": $test_result}";
+
+	my $ua = LWP::UserAgent->new();
+	my $req = HTTP::Request->new(PUT => $url);
+	$req->authorization_basic($username, $access_key);
+	$req->header('content-type' => 'application/json');
+	$req->content($result_data);
+	print Dumper($req);
+	$ua->request($req)->as_string;
+}
+update_sauce();
 
 
 

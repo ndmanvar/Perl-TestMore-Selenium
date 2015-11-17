@@ -12,7 +12,7 @@ cpanm JSON
 cpanm Env
 cpanm Selenium::Remote::Driver
 
-*sudo may be necessary
+	*sudo may be necessary
 ```
 
 # Running the tests
